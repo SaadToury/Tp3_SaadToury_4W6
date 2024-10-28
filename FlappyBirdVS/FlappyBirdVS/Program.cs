@@ -1,6 +1,40 @@
+using FlappyBirdVS.Data;
+using FlappyBirdVS.Model;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Proxies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<FlappyBirdVSContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FlappyBirdVSContext") ?? throw new InvalidOperationException("Connection string 'FlappyBirdVSContext' not found."));
+    options.UseLazyLoadingProxies();
+}
+);
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<FlappyBirdVSContext>();
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Allow all", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
+    }
+    );
+}
+);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -15,6 +49,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("Allow all");
 
 app.UseHttpsRedirection();
 

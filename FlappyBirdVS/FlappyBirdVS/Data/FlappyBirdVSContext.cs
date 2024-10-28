@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using FlappyBirdVS.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FlappyBirdVS.Data
 {
-    public class FlappyBirdVSContext : DbContext
+    public class FlappyBirdVSContext : IdentityDbContext
     {
         public FlappyBirdVSContext (DbContextOptions<FlappyBirdVSContext> options)
             : base(options)
