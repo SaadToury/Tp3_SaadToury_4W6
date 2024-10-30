@@ -3,6 +3,7 @@ using FlappyBirdVS.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Proxies;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,9 +29,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Allow all", policy =>
     {
-        policy.AllowAnyHeader();
-        policy.AllowAnyMethod();
         policy.AllowAnyOrigin();
+        policy.AllowAnyMethod();
+        policy.AllowAnyHeader();
+        
+        
     }
     );
 }
@@ -52,6 +55,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors("Allow all");
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

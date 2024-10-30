@@ -7,9 +7,16 @@ namespace FlappyBirdVS.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         readonly UserManager<User> manager;
+
+        public UsersController(UserManager<User> Manager)
+        {
+            this.manager = Manager;
+        }
+
+        [HttpPost]
         public async Task<ActionResult> Register(RegisterDTO register)
         {
             if(register.Password != register.Passwordconfirm)
@@ -32,9 +39,6 @@ namespace FlappyBirdVS.Controllers
             }
             return Ok();
         }
-        public UserController()
-        {
-            
-        }
+        
     }
 }

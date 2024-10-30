@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FlappyBirdVS.Data
 {
-    public class FlappyBirdVSContext : IdentityDbContext
+    public class FlappyBirdVSContext : IdentityDbContext<User>
     {
         public FlappyBirdVSContext (DbContextOptions<FlappyBirdVSContext> options)
             : base(options)
