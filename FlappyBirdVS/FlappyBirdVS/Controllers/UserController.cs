@@ -62,7 +62,7 @@ namespace FlappyBirdVS.Controllers
                 authClaims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
                 SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.config["JWT:Secret"]));
                 JwtSecurityToken token = new JwtSecurityToken(
-                    issuer: "http://localhost:5266",
+                    issuer: "https://localhost:5266",
                     audience: "http://localhost:4200",
                     claims: authClaims,
                     expires: DateTime.Now.AddMinutes(30),

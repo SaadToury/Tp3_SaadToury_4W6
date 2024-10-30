@@ -55,7 +55,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateIssuer = true,
         ValidAudience = "http://localhost:4200",
-        ValidIssuer = "http://localhost:5266",
+        ValidIssuer = "https://localhost:5266",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])
             )
     };
